@@ -1,6 +1,6 @@
 # MediaBar
 Media Bar for dock/panel use, based on KDE Plasma Media Player Controls
-![Expanded View](/Screenshot.png?raw=true "MediaBar expanded view")
+![Expanded View](https://i.imgur.com/Oy0Idpj.png "MediaBar expanded view")
 
 ## Features
 * View and control Media from inside a panel or dock (such as [Latte Dock](https://github.com/KDE/latte-dock))
