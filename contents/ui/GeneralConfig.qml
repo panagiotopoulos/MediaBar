@@ -20,18 +20,28 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.11
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
 	id: configRoot
 
+	signal configurationChanged
+
 	property alias cfg_maximumWidth: widthSlider.value
 	property alias cfg_minimumWidth: widthSlider.from
-	property alias cfg_preferredSource: sourceInput.text
+	property string cfg_preferredSource
 	property alias cfg_useWheelForSeeking: scrollSeekCheckBox.checked
 
 	ColumnLayout {
+		spacing: units.smallSpacing*2
+
+		CheckBox {
+			id: scrollSeekCheckBox
+			text: i18n("Use scroll wheel for seeking")
+		}
+
 		Label {
-			text: i18n("Maximum width for compact view when in a panel:")
+			text: i18n("Maximum width:")
 		}
 
 		RowLayout {
@@ -47,41 +57,44 @@ Item {
 			}
 		}
 
-		Item { // spacer item
-			Layout.fillWidth: true
-			Layout.topMargin: 8
-			Layout.bottomMargin: 8
-			Rectangle {
-				width: parent.width*0.9
-				height: 1
-				color: "#666666"
-			}
-        }
-
 		Label {
-			text: "Preferred media source (for example: cantata, @multiplex, etc):"
+			text:  i18n("Preferred media source:")
 		}
 
-		TextField {
-			id: sourceInput
-			focus: true
-			placeholderText: qsTr("@multiplex")
-		}
-
-		Item { // spacer item
-			Layout.fillWidth: true
-			Layout.topMargin: 8
-			Layout.bottomMargin: 8
-			Rectangle {
-				width: parent.width*0.9
-				height: 1
-				color: "#666666"
+		ListModel {
+			id: sourcesModel
+			Component.onCompleted: {
+				var arr = [];
+				arr.push({text: cfg_preferredSource});
+				var sources = dataSource.sources;
+				for (var i = 0, j = sources.length; i < j; ++i) {
+					if (sources[i] === cfg_preferredSource) {
+						continue
+					}
+					arr.push({text: sources[i]});
+				}
+				append(arr);
 			}
-        }
-
-		CheckBox {
-			id: scrollSeekCheckBox
-			text: i18n("Use scroll wheel for seeking")
 		}
+
+		ComboBox {
+			id: sourcesComboBox
+			model: sourcesModel
+			focus: true
+			currentIndex: 0
+			textRole: "text"
+			onCurrentIndexChanged: {
+				var current = model.get(currentIndex);
+				if (current) {
+					cfg_preferredSource = current.text;
+					configRoot.configurationChanged();
+				}
+			}
+		}
+	}
+
+	PlasmaCore.DataSource {
+		id: dataSource
+		engine: "mpris2"
 	}
 }

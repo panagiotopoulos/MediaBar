@@ -78,7 +78,10 @@ Item {
 				elide: scrolling ? Text.ElideNone : Text.ElideRight
 				maximumLineCount: 1
 
-				onTextChanged: run();
+				onTextChanged: {
+					anim.complete();
+					run();
+				}
 
 				function run() {
 					if (calculatedTextWidth  >= barTextMetrics.width || anim.running || scrolling) {
@@ -124,7 +127,7 @@ Item {
 
 	TextMetrics {
 		id: barTextMetrics
-		text: (mediaSource.artist ? mediaSource.artist + " - " : "") + plasmoid.toolTipMainText
+		text: (mediaSource.artist ? mediaSource.artist + " - " : "") + (mediaSource.track ? mediaSource.track : "")
 		font.pixelSize: compactTrackInfo.font.pixelSize
 	}
 

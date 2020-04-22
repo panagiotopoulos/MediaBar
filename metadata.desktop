@@ -2,7 +2,7 @@
 Encoding=UTF-8
 
 Name=MediaBar
-Comment=Media Bar for system tray use based on KDE Plasma Media Player Controls
+Comment=Media Bar for dock/panel use, based on KDE Plasma Media Player Controls
 Icon=applications-multimedia
 Type=Service
 

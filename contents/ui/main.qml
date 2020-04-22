@@ -62,7 +62,6 @@ Item {
 		if(mediaSource.canRaise){
 			plasmoid.setAction("open", i18nc("Open player window or bring it to the front if already open", "Open "+mediaSource.playerName), mediaSource.playerIcon);
 		}
-		//mediaSource.serviceForSource("@multiplex").enableGlobalShortcuts()
 	}
 
 	PlasmaCore.DataSource {
@@ -70,7 +69,7 @@ Item {
 		engine: "mpris2"
 		connectedSources: sources
 
-		readonly property string currentSource: plasmoid.configuration.preferredSource
+		property string currentSource: plasmoid.configuration.preferredSource
 		property var currentData: data[currentSource]
 		property var currentMetadata: currentData ? currentData.Metadata : {}
 
@@ -164,4 +163,8 @@ Item {
 			updatePosition();
 		}
 	}
+
+	Component.onCompleted: {
+        mediaSource.serviceForSource("@multiplex").enableGlobalShortcuts();
+    }
 }

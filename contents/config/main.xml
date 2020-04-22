@@ -15,7 +15,7 @@
 		<label>Maximum text width when in panel.</label>
 	</entry>
 	 <entry name="preferredSource" type="String">
-		<default>cantata</default>
+		<default>@multiplex</default>
 		<label>Preferred source name for MPRIS2</label>
 	</entry>
 	<entry name="useWheelForSeeking" type="Bool">
