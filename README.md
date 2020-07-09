@@ -13,7 +13,7 @@ Media Bar for dock/panel use, based on KDE Plasma Media Player Controls
 Note: The plasmoid relies on the mpris2 protocol to view and control the media. If you can't see some stuff or you can't control some aspects it's possible that your media player doesn't provide those to the mpris2 protocol and there's nothing MediaBar can do about it.
 
 ## Requirements
- **Plasma 5** and **Qt >= 5.13.0**
+ **Plasma 5** and **Qt >= 5.12**
 
 ## Manual installation
 Download the code from this repository, enter the downloaded directory (where the metadata.desktop file is) and run: `kpackagetool5 -t Plasma/Applet --install ./`

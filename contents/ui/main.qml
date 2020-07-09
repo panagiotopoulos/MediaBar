@@ -17,7 +17,7 @@
  *    along with MediaBar.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.13
+import QtQuick 2.12
 import QtQuick.Layouts 1.11
 import QtQuick.Controls 2.12
 import org.kde.plasma.plasmoid 2.0
