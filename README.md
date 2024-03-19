@@ -8,15 +8,14 @@ Media Bar for dock/panel use, based on KDE Plasma Media Player Controls
 * View Album and Album Art on expanded view and tooltip
 * View current position of track in expanded view
 * Controllable with [Shortcuts](#shortcuts)
-* Smart [auto-sizing and text scrolling](#auto-size)
 
 Note: The plasmoid relies on the mpris2 protocol to view and control the media. If you can't see some stuff or you can't control some aspects it's possible that your media player doesn't provide those to the mpris2 protocol and there's nothing MediaBar can do about it.
 
 ## Requirements
- **Plasma 5** and **Qt >= 5.12**
+ **Plasma 6** and **Qt >= 6.x**
 
 ## Manual installation
-Download the code from this repository, enter the downloaded directory (where the metadata.desktop file is) and run: `kpackagetool5 -t Plasma/Applet --install ./`
+Download the code from this repository, enter the downloaded directory (where the metadata.desktop file is) and run: `kpackagetool6 -t Plasma/Applet --install ./package`
 
 ## Configuration
 Configuration is available if you right-click the plasmoid and select "Configure MediaBar..."
@@ -26,29 +25,26 @@ By default, MediaBar uses the `@multiplex` mpris2 source which is the combinatio
 ## Shortcuts
 **Panel:**
 
-| Mouse button    | Action             |
-|----------------:|--------------------|
-| `Left button`   | Play/Pause         |
-| `Right button`  | Open context menu  |
-| `Middle button` | Open expanded view |
-| `Wheel Down`    | Seek back 5s       |
-| `Wheel Up`      | Seek forward 5s    |
-| `Back button`   | Previous           |
-| `Forward button`| Next               |
+| Mouse button     | Action             |
+| ---------------: | ------------------ |
+| `Left button`    | Play/Pause         |
+| `Right button`   | Open context menu  |
+| `Middle button`  | Open expanded view |
+| `Wheel Down`     | Seek back 5s       |
+| `Wheel Up`       | Seek forward 5s    |
+| `Back button`    | Previous           |
+| `Forward button` | Next               |
 
 Note: Wheel Up/Down will only work if you tick "Use scroll wheel for seeking" in the plasmoid's options.
 
 **Expanded:**
 
-| Key          | Action          |
-|-------------:|-----------------|
-| `K`, `Space` | Play/Pause      |
-| `P`          | Previous        |
-| `N`          | Next            |
-| `Left`, `J`  | Seek back 5s    |
-| `Right`, `L` | Seek forward 5s |
-| `Home`       | Seek start      |
-| `Num: [0..9]`| Jump to porcentage, `Key 0: 0%, ..., Key 9: 90%` |
-
-### Auto Size
-The plasmoid will auto-size to fit the text up to a maximum configurable width. If the text is wider than the available space, it will be elided and an autoscroll animation will play whenever you hover over the plasmoid or the currently playing track changes.
+| Key           | Action          |
+| ------------: | --------------- |
+| `K`, `Space`  | Play/Pause      |
+| `P`           | Previous        |
+| `N`           | Next            |
+| `Left`, `J`   | Seek back 5s    |
+| `Right`, `L`  | Seek forward 5s |
+| `Home`        | Seek start      |
+| `Num: [0..9]` | Jump to percentage, `Key 0: 0%, ..., Key 9: 90%` |

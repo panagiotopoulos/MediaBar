@@ -1,0 +1,34 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "panagiotopoulos.git@gmail.com",
+                "Name": "Panagiotis Panagiotopoulos"
+            }
+        ],
+        "BugReportUrl": "https://github.com/panagiotopoulos/MediaBar/issues",
+        "Category": "Multimedia",
+        "Description": "Media Bar for dock/panel use, based on KDE Plasma Media Player Controls",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "tablet",
+            "handset",
+            "desktop"
+        ],
+        "Icon": "applications-multimedia",
+        "Id": "org.kde.mediabar",
+        "License": "GPLv3",
+        "Name": "MediaBar",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "2.0",
+        "Website": "https://github.com/panagiotopoulos/MediaBar"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-DBusActivationService": "org.mpris.MediaPlayer2.*",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.multimediacontrols"
+    ]
+}
