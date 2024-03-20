@@ -9,7 +9,7 @@
         ],
         "BugReportUrl": "https://github.com/panagiotopoulos/MediaBar/issues",
         "Category": "Multimedia",
-        "Description": "Media Bar for dock/panel use, based on KDE Plasma Media Player Controls",
+        "Description": "Media Player Controls",
         "EnabledByDefault": true,
         "FormFactors": [
             "tablet",
@@ -20,10 +20,7 @@
         "Id": "org.kde.mediabar",
         "License": "GPLv3",
         "Name": "MediaBar",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
-        "Version": "2.0",
+        "Version": "2.1",
         "Website": "https://github.com/panagiotopoulos/MediaBar"
     },
     "X-Plasma-API-Minimum-Version": "6.0",

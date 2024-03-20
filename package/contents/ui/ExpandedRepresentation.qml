@@ -21,7 +21,6 @@ import QtQuick
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.coreaddons 1.0 as KCoreAddons
@@ -30,14 +29,16 @@ import org.kde.kirigami 2 as Kirigami
 PlasmaExtras.Representation {
     id: expandedRepresentation
 
-    readonly property int durationFormattingOptions: root.length >= 60*60*1000*1000 ? 0 : KCoreAddons.FormatTypes.FoldHours
-
     spacing: Kirigami.Units.smallSpacing * 2
 
-    Layout.minimumWidth: root.minWidth
-    Layout.maximumWidth: root.maxWidth
-    Layout.preferredWidth: root.maxWidth
+    readonly property int durationFormattingOptions: root.length >= 60*60*1000*1000 ? 0 : KCoreAddons.FormatTypes.FoldHours
 
+    Layout.minimumWidth: root.minWidth + Kirigami.Units.gridUnit * 4
+    Layout.maximumWidth: root.maxWidth
+    Layout.preferredWidth: root.width
+
+    Layout.minimumHeight: Math.max(Layout.minimumWidth, column.implicitHeight)
+    Layout.maximumHeight: Math.min(Layout.maximumWidth + Kirigami.Units.gridUnit * 8, column.implicitHeight)
     Layout.preferredHeight: column.implicitHeight
 
     function formatTime(time) {
@@ -60,7 +61,7 @@ PlasmaExtras.Representation {
             } else if (event.key === Qt.Key_Right || event.key === Qt.Key_L) {
                 // seek forward 5s
                 root.seekForward();
-            } else if (event.key === Qt.Key_Home ||  event.key === Qt.Key_0) {
+            } else if (event.key === Qt.Key_Home || event.key === Qt.Key_0) {
                 root.setPosition(0);
             } else if (event.key > Qt.Key_0 && event.key <= Qt.Key_9) {
                 // jump to percentage, ie. 0 = beginning, 1 = 10% of total length etc
@@ -76,17 +77,17 @@ PlasmaExtras.Representation {
         enabled: root.loaded
 
         Image {
-            id: albumArt
-            source: plasmoid.icon
-            asynchronous: true
-            sourceSize.width: expandedRepresentation.width
-            Layout.fillWidth: true
-            fillMode: Image.PreserveAspectFit
             visible: status === Image.Ready
+            asynchronous: true
+            cache: false
+            source: root.albumArt
+            sourceSize.width: expandedRepresentation.width
+            fillMode: Image.PreserveAspectFit
         }
 
         RowLayout {
             spacing: Kirigami.Units.smallSpacing * 2
+
             TextMetrics {
                 id: timeMetrics
                 text: i18nc("Remaining time for song e.g -5:42", "-%1", formatTime(progressBar.to))
@@ -94,51 +95,61 @@ PlasmaExtras.Representation {
             }
 
             PC3.Label {
-                Layout.preferredWidth: timeMetrics.width
-                horizontalAlignment: Text.AlignRight
                 text: formatTime(progressBar.value)
-                opacity: 0.9
-                font: Kirigami.Theme.smallFont
+                font: timeMetrics.font
                 color: Kirigami.Theme.textColor
+                opacity: 0.9
+                horizontalAlignment: Text.AlignRight
+                Layout.preferredWidth: timeMetrics.width
             }
 
             PC3.ProgressBar {
                 id: progressBar
                 to: Math.ceil(root.length / 1000)
                 value: Math.ceil(root.position / 1000)
+                Layout.alignment: Qt.AlignVCenter
                 Layout.fillWidth: true
             }
 
             PC3.Label {
-                Layout.preferredWidth: timeMetrics.width
-                horizontalAlignment: Text.AlignLeft
                 text: formatTime(progressBar.to)
-                opacity: 0.9
-                font: Kirigami.Theme.smallFont
+                font: timeMetrics.font
                 color: Kirigami.Theme.textColor
+                opacity: 0.9
+                horizontalAlignment: Text.AlignLeft
+                Layout.preferredWidth: timeMetrics.width
             }
         }
 
-        PC3.Label {
-            Layout.fillWidth: true
-            visible: text !== ""
-            horizontalAlignment: Text.AlignHCenter
+        Kirigami.Heading {
+            visible: text.length > 0
+            level: 2
+
             text: root.toolTipMainText
-            wrapMode: Text.WordWrap
-            font.pointSize: subLabel.font.pointSize * 1.2
-            minimumPointSize: Kirigami.Theme.smallFont.pointSize
+            color: Kirigami.Theme.textColor
+
+            textFormat: Text.PlainText
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
+
+            Layout.fillWidth: true
+            Layout.maximumWidth: expandedRepresentation.width
         }
 
-        PC3.Label {
-            id: subLabel
-            visible: text !== ""
-            Layout.fillWidth: true
-            horizontalAlignment: Text.AlignHCenter
+        Kirigami.Heading {
+            visible: text.length > 0
+            level: 3
+
             text: root.toolTipSubText
-            wrapMode: Text.WordWrap
-            fontSizeMode: Text.Fit
-            minimumPointSize: Kirigami.Theme.smallFont.pointSize
+            color: Kirigami.Theme.textColor
             opacity: 0.6
+
+            textFormat: Text.PlainText
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
+
+            Layout.fillWidth: true
+            Layout.maximumWidth: expandedRepresentation.width
         }
     }
 }

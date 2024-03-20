@@ -36,8 +36,6 @@ MouseArea {
     hoverEnabled: true
     acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.BackButton | Qt.ForwardButton
 
-    property int wheelDelta: 0
-
     onClicked: mouse => {
         switch (mouse.button) {
             case Qt.LeftButton:
@@ -58,35 +56,41 @@ MouseArea {
         }
     }
 
+    property int wheelDelta: 0
+
     onWheel: wheel => {
         wheelDelta += (wheel.inverted ? -1 : 1) * (wheel.angleDelta.y ? wheel.angleDelta.y : -wheel.angleDelta.x)
         while (wheelDelta >= 120) {
             wheelDelta -= 120;
-            root.seekBack();
+            root.seekForward();
         }
         while (wheelDelta <= -120) {
             wheelDelta += 120;
-            root.seekForward();
+            root.seekBack();
         }
     }
 
     RowLayout {
         id: row;
         spacing: 0
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+        }
 
         Kirigami.Icon {
             id: icon
             color: Kirigami.Theme.textColor
             implicitHeight: Math.min(compactRepresentation.height, Kirigami.Units.iconSizes.medium)
             implicitWidth: implicitHeight
-            source: root.isPlaying ? "stock_media-pause" : "stock_media-play"
+            source: plasmoid.icon
         }
 
         PC3.Label {
             text: (root.artist ? root.artist + " - " : "") + (root.track || "")
-            Layout.maximumWidth: root.maxWidth - icon.width
-            elide: Text.ElideRight
             maximumLineCount: 1
+            elide: Text.ElideRight
+            Layout.maximumWidth: root.maxWidth - icon.width
         }
     }
 }

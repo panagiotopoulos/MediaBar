@@ -55,10 +55,10 @@ PlasmoidItem {
     fullRepresentation: ExpandedRepresentation {}
     preferredRepresentation: compactRepresentation
 
-    Plasmoid.icon: albumArt ? albumArt : ""
     Plasmoid.status: loaded ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
-    toolTipMainText: track || ""
-    toolTipSubText: artist ? (artist + " - " + album) : ""
+    Plasmoid.icon: isPlaying ? "stock_media-pause" : "stock_media-play"
+    toolTipMainText: track
+    toolTipSubText: artist && album ? (artist + " - " + album) : (artist || album)
     toolTipTextFormat: Text.PlainText
 
     Plasmoid.contextualActions: [
