@@ -28,6 +28,7 @@ import org.kde.kirigami 2 as Kirigami
 
 PlasmaExtras.Representation {
     id: expandedRepresentation
+    enabled: root.loaded
 
     spacing: Kirigami.Units.smallSpacing * 2
 
@@ -74,7 +75,6 @@ PlasmaExtras.Representation {
 
     ColumnLayout {
         id: column
-        enabled: root.loaded
 
         Image {
             visible: status === Image.Ready

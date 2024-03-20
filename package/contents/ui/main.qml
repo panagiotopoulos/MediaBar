@@ -41,21 +41,14 @@ PlasmoidItem {
     }
 
     onPreferredSourceChanged: {
-        const CONTAINER_ROLE = Qt.UserRole + 1;
-        for (var i = 1; i < mpris2Model.rowCount(); ++i) {
-            const name = mpris2Model.data(mpris2Model.index(i, 0), CONTAINER_ROLE).objectName;
-            if (name === preferredSource) {
-                mpris2Model.currentIndex = i;
-                return;
-            }
-        }
+        mpris2Model.refreshSource();
     }
 
     compactRepresentation: CompactRepresentation {}
     fullRepresentation: ExpandedRepresentation {}
     preferredRepresentation: compactRepresentation
 
-    Plasmoid.status: loaded ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
+    Plasmoid.status: PlasmaCore.Types.ActiveStatus
     Plasmoid.icon: isPlaying ? "stock_media-pause" : "stock_media-play"
     toolTipMainText: track
     toolTipSubText: artist && album ? (artist + " - " + album) : (artist || album)
@@ -124,5 +117,25 @@ PlasmoidItem {
     }
     Mpris.Mpris2Model {
         id: mpris2Model
+
+        onRowsInserted: (_, rowIndex) => {
+            refreshSource();
+        }
+
+        onRowsRemoved: (_, rowIndex) => {
+            refreshSource();
+        }
+
+        function refreshSource() {
+            const CONTAINER_ROLE = Qt.UserRole + 1
+            for (var idx = 1; idx < rowCount(); ++idx) {
+                const player = data(index(idx, 0), CONTAINER_ROLE)
+                if (player.objectName === preferredSource) {
+                    currentIndex = idx;
+                    return;
+                }
+            }
+            currentIndex = 0;
+        }
     }
 }

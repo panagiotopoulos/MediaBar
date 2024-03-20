@@ -37,6 +37,9 @@ MouseArea {
     acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.BackButton | Qt.ForwardButton
 
     onClicked: mouse => {
+         if (!root.loaded) {
+            return;
+        }
         switch (mouse.button) {
             case Qt.LeftButton:
                 root.togglePlaying();
@@ -59,6 +62,9 @@ MouseArea {
     property int wheelDelta: 0
 
     onWheel: wheel => {
+        if (!root.loaded) {
+            return;
+        }
         wheelDelta += (wheel.inverted ? -1 : 1) * (wheel.angleDelta.y ? wheel.angleDelta.y : -wheel.angleDelta.x)
         while (wheelDelta >= 120) {
             wheelDelta -= 120;
@@ -87,10 +93,16 @@ MouseArea {
         }
 
         PC3.Label {
-            text: (root.artist ? root.artist + " - " : "") + (root.track || "")
+            visible: root.loaded
+            text: (root.artist ? root.artist + " - " : "") + root.track
             maximumLineCount: 1
             elide: Text.ElideRight
             Layout.maximumWidth: root.maxWidth - icon.width
+        }
+
+        PC3.Label {
+            visible: !root.loaded
+            text: i18n("No Source")
         }
     }
 }
