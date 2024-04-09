@@ -19,5 +19,9 @@
             <default>false</default>
             <label>Allow media seeking using the mouse scroll wheel.</label>
         </entry>
+        <entry name="showPlayStateIcon" type="Bool">
+            <default>true</default>
+            <label>Show icon next to label with current play state.</label>
+        </entry>
     </group>
 </kcfg>

@@ -85,6 +85,7 @@ MouseArea {
         }
 
         Kirigami.Icon {
+            visible: root.playStateIcon
             id: icon
             color: Kirigami.Theme.textColor
             implicitHeight: Math.min(compactRepresentation.height, Kirigami.Units.iconSizes.medium)
