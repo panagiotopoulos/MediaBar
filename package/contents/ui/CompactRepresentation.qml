@@ -98,6 +98,7 @@ MouseArea {
             maximumLineCount: 1
             elide: Text.ElideRight
             Layout.maximumWidth: root.maxWidth - icon.width
+            opacity: root.isPlaying ? 1 : 0.3
         }
 
         PC3.Label {
