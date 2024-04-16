@@ -85,6 +85,7 @@ MouseArea {
         }
 
         Kirigami.Icon {
+            visible: root.playStateIcon
             id: icon
             color: Kirigami.Theme.textColor
             implicitHeight: Math.min(compactRepresentation.height, Kirigami.Units.iconSizes.medium)
@@ -98,6 +99,7 @@ MouseArea {
             maximumLineCount: 1
             elide: Text.ElideRight
             Layout.maximumWidth: root.maxWidth - icon.width
+            opacity: !root.isPlaying && !root.playStateIcon ? 0.6 : 1
         }
 
         PC3.Label {

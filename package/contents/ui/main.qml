@@ -30,6 +30,7 @@ PlasmoidItem {
     id: root
 
     property bool seekingWheel: Plasmoid.configuration.useWheelForSeeking
+    property bool playStateIcon: Plasmoid.configuration.showPlayStateIcon
     property int minWidth: Plasmoid.configuration.minimumWidth
     property int maxWidth: Plasmoid.configuration.maximumWidth
     property string preferredSource: Plasmoid.configuration.preferredSource
