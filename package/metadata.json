@@ -20,7 +20,7 @@
         "Id": "org.kde.mediabar",
         "License": "GPLv3",
         "Name": "MediaBar",
-        "Version": "2.1",
+        "Version": "2.2",
         "Website": "https://github.com/panagiotopoulos/MediaBar"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
