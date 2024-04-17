@@ -21,10 +21,10 @@ import QtQuick
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.components 3.0 as PC3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.coreaddons 1.0 as KCoreAddons
-import org.kde.kirigami 2 as Kirigami
+import org.kde.plasma.components as PC
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.coreaddons as KCoreAddons
+import org.kde.kirigami as Kirigami
 
 PlasmaExtras.Representation {
     id: expandedRepresentation
@@ -94,8 +94,9 @@ PlasmaExtras.Representation {
                 font: Kirigami.Theme.smallFont
             }
 
-            PC3.Label {
+            PC.Label {
                 text: formatTime(progressBar.value)
+                textFormat: Text.PlainText
                 font: timeMetrics.font
                 color: Kirigami.Theme.textColor
                 opacity: 0.9
@@ -103,7 +104,7 @@ PlasmaExtras.Representation {
                 Layout.preferredWidth: timeMetrics.width
             }
 
-            PC3.ProgressBar {
+            PC.ProgressBar {
                 id: progressBar
                 to: Math.ceil(root.length / 1000)
                 value: Math.ceil(root.position / 1000)
@@ -111,8 +112,9 @@ PlasmaExtras.Representation {
                 Layout.fillWidth: true
             }
 
-            PC3.Label {
+            PC.Label {
                 text: formatTime(progressBar.to)
+                textFormat: Text.PlainText
                 font: timeMetrics.font
                 color: Kirigami.Theme.textColor
                 opacity: 0.9

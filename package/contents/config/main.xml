@@ -18,7 +18,7 @@
             <default>false</default>
             <label>Allow media seeking using the mouse scroll wheel.</label>
         </entry>
-        <entry name="showPlayStateIcon" type="Bool">
+        <entry name="showStatusIcon" type="Bool">
             <default>true</default>
             <label>Show media playback status icon.</label>
         </entry>

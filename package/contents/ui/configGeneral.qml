@@ -26,8 +26,8 @@ import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
-    property alias cfg_showPlayStateIcon: showPlayStateIconCheckBox.checked
-    property alias cfg_useWheelForSeeking: scrollSeekCheckBox.checked
+    property alias cfg_showStatusIcon: showStatusIcon.checked
+    property alias cfg_useWheelForSeeking: scrollSeek.checked
     property alias cfg_maximumWidth: widthSlider.value
     property alias cfg_minimumWidth: widthSlider.from
     property string cfg_preferredSource: sources.displayText
@@ -36,12 +36,12 @@ KCM.SimpleKCM {
         Layout.fillWidth: true
 
         CheckBox {
-            id: showPlayStateIconCheckBox
+            id: showStatusIcon
             text: i18n("Show playback status icon")
         }
 
         CheckBox {
-            id: scrollSeekCheckBox
+            id: scrollSeek
             text: i18n("Use scroll wheel for seeking")
         }
 

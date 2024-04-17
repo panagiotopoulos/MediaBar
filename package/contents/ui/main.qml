@@ -20,17 +20,17 @@
 import QtQuick
 import QtQuick.Layouts
 
-import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.private.mediacontroller 1.0
+import org.kde.plasma.private.mediacontroller
 import org.kde.plasma.private.mpris as Mpris
-import org.kde.kirigami 2 as Kirigami
+import org.kde.kirigami as Kirigami
 
 PlasmoidItem {
     id: root
 
+    property bool showStatusIcon: Plasmoid.configuration.showStatusIcon
     property bool seekingWheel: Plasmoid.configuration.useWheelForSeeking
-    property bool playStateIcon: Plasmoid.configuration.showPlayStateIcon
     property int minWidth: Plasmoid.configuration.minimumWidth
     property int maxWidth: Plasmoid.configuration.maximumWidth
     property string preferredSource: Plasmoid.configuration.preferredSource
@@ -91,7 +91,7 @@ PlasmoidItem {
     readonly property double position: loaded ? mpris2Model.currentPlayer.position : 0
     readonly property bool canGoPrevious: loaded ? mpris2Model.currentPlayer.canGoPrevious : false
     readonly property bool canGoNext: loaded ? mpris2Model.currentPlayer.canGoNext : false
-    readonly property bool isPlaying: loaded ? mpris2Model.currentPlayer.playbackStatus === Mpris.PlaybackStatus.Playing : 0
+    readonly property bool isPlaying: loaded ? mpris2Model.currentPlayer.playbackStatus === Mpris.PlaybackStatus.Playing : false
     readonly property bool canRaise: loaded ? mpris2Model.currentPlayer.canRaise : false
     // END model properties
 

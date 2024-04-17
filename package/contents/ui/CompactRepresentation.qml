@@ -20,9 +20,9 @@
 import QtQuick
 import QtQuick.Layouts
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.components 3.0 as PC3
-import org.kde.kirigami 2 as Kirigami
+import org.kde.plasma.plasmoid
+import org.kde.plasma.components as PC
+import org.kde.kirigami as Kirigami
 
 MouseArea {
     id: compactRepresentation
@@ -77,7 +77,7 @@ MouseArea {
     }
 
     RowLayout {
-        id: row;
+        id: row
         spacing: 0
         anchors {
             top: parent.top
@@ -85,7 +85,7 @@ MouseArea {
         }
 
         Kirigami.Icon {
-            visible: root.playStateIcon
+            visible: root.showStatusIcon
             id: icon
             color: Kirigami.Theme.textColor
             implicitHeight: Math.min(compactRepresentation.height, Kirigami.Units.iconSizes.medium)
@@ -93,18 +93,20 @@ MouseArea {
             source: plasmoid.icon
         }
 
-        PC3.Label {
+        PC.Label {
             visible: root.loaded
             text: (root.artist ? root.artist + " - " : "") + root.track
+            textFormat: Text.PlainText
             maximumLineCount: 1
             elide: Text.ElideRight
             Layout.maximumWidth: root.maxWidth - icon.width
-            opacity: !root.isPlaying && !root.playStateIcon ? 0.6 : 1
+            opacity: !root.isPlaying && !root.showStatusIcon ? 0.6 : 1
         }
 
-        PC3.Label {
+        PC.Label {
             visible: !root.loaded
             text: i18n("No Source")
+            textFormat: Text.PlainText
         }
     }
 }
