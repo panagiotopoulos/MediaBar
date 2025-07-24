@@ -15,7 +15,14 @@ Note: The plasmoid relies on the mpris2 protocol to view and control the media. 
  **Plasma 6** and **Qt >= 6.x**
 
 ## Manual installation
-Download the code from this repository, enter the downloaded directory (where the metadata.desktop file is) and run: `kpackagetool6 -t Plasma/Applet --install ./package`
+Download the code from this repository, enter the downloaded directory (where the metadata.json file is) and run: `kpackagetool6 -t Plasma/Applet --install .`
+
+Or copy/paste:
+```
+git clone https://github.com/panagiotopoulos/MediaBar.git
+cd MediaBar
+kpackagetool6 -t Plasma/Applet --install .
+```
 
 ## Configuration
 Configuration is available if you right-click the plasmoid and select "Configure MediaBar..."
